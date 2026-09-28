@@ -1,0 +1,2 @@
+# Uses Forge's existing torch/transformers/accelerate/diffusers/safetensors.
+# gguf is bundled separately under vendor/deps; do not upgrade host packages.
