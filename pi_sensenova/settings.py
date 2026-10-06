@@ -2,8 +2,8 @@
 from dataclasses import dataclass
 import math
 
-UI_KEYS = ("resources", "memory", "fast", "adapter", "natural", "think", "shift", "degrid")
-DEFAULTS = ("", "Auto", False, "", True, False, 3.0, False)
+UI_KEYS = ("resources", "memory", "fast", "adapter", "natural", "think", "shift", "degrid", "loop_depth")
+DEFAULTS = ("", "Auto", False, "", True, False, 3.0, False, 4)
 NATURAL = (
     "Photographic treatment: natural skin texture with visible pores and fine facial hair, "
     "subtle irregularities, realistic fabric weave and material texture, physically plausible "
@@ -22,16 +22,21 @@ class Settings:
     think: bool = False
     shift: float = 3.0
     degrid: bool = False
+    loop_depth: int = 4
 
     @classmethod
     def from_ui(cls, values):
         if len(values) == 7:  # Existing API clients and saved UI settings.
             values = (*values, False)
+        if len(values) == 8:
+            values = (*values, 4)
         if len(values) != len(UI_KEYS):
             raise ValueError("SenseNova controls changed; fully restart Forge before generating.")
         result = cls(**dict(zip(UI_KEYS, values)))
         if not isinstance(result.degrid, bool):
             raise ValueError("DeGrid must be enabled or disabled.")
+        if isinstance(result.loop_depth, bool) or not float(result.loop_depth).is_integer() or not 1 <= int(result.loop_depth) <= 16:
+            raise ValueError("Loop depth must be a whole number from 1 to 16.")
         if result.memory not in ("Auto", "Full", "Fast offload", "Balanced", "Low VRAM"):
             raise ValueError("Unknown SenseNova memory mode.")
         if not math.isfinite(float(result.shift)) or not 0.1 <= float(result.shift) <= 10:

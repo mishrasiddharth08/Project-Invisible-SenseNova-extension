@@ -5,3 +5,5 @@ body.pi-sensenova-active #tab_img2img .progressDiv { display: none !important; }
 .sn-dual-progress progress { display: block; width: 100%; height: 18px; accent-color: #4096ff; }
 .sn-dual-progress { padding: 8px 0; }
 body:not(.pi-sensenova-active) .sn-dual-progress { display: none; }
+body:not(.pi-looped-active) #pi_looped_t2i,
+body:not(.pi-looped-active) #pi_looped_i2i { display: none !important; }

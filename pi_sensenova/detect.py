@@ -41,6 +41,8 @@ def _gguf_identity(path, size, mtime):
 def is_ours(path):
     p = Path(path)
     try:
+        if p.suffix.lower() == ".pt":
+            return is_looped(p)
         if p.is_dir() or p.name == "config.json":
             cfg = json.loads((p / "config.json" if p.is_dir() else p).read_text(encoding="utf-8"))
             return cfg.get("model_type") == "neo_chat"
@@ -54,6 +56,34 @@ def is_ours(path):
     except (OSError, ValueError, ImportError, KeyError, TypeError):
         return False
     return False
+
+
+def is_looped(path):
+    """Inspect tensor/config signatures without trusting filenames or pickle code."""
+    p = Path(path)
+    if p.suffix.lower() != ".pt" or not p.is_file():
+        return False
+    st = p.stat()
+    return _looped_identity(str(p.resolve()), st.st_size, st.st_mtime_ns)
+
+
+@lru_cache(maxsize=16)
+def _looped_identity(path, size, mtime):
+    try:
+        import torch
+        # Meta mapping reads tensor descriptions, without allocating their storage.
+        checkpoint = torch.load(path, map_location="meta", weights_only=True, mmap=True)
+        cfg = checkpoint.get("config", {})
+        weights = checkpoint.get("ema", {})
+        return (isinstance(cfg, dict) and isinstance(weights, dict)
+                and cfg.get("image_size", 512) == 512
+                and cfg.get("patch_size", 32) in (16, 32)
+                and isinstance(cfg.get("loop_split"), (list, tuple))
+                and len(cfg["loop_split"]) == 3
+                and all(k in weights and isinstance(weights[k], torch.Tensor)
+                        for k in ("img_embed.proj1.weight", "txt_embed.weight", "mask_token", "final.weight")))
+    except Exception:
+        return False
 
 
 def resolve(path, resources=""):

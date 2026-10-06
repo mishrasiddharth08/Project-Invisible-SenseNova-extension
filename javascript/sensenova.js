@@ -17,7 +17,7 @@
         const changed = next !== signature;
         signature = next;
         const current = ++request;
-        if (changed) document.body.classList.remove("pi-sensenova-active");
+        if (changed) document.body.classList.remove("pi-sensenova-active", "pi-looped-active");
         try {
             const response = await fetch("/pi-sensenova/state?checkpoint=" + encodeURIComponent(next), {cache: "no-store"});
             if (!response.ok) throw new Error("SenseNova state unavailable");
@@ -25,6 +25,7 @@
             if ((checkpoint.querySelector("input")?.value || "") !== next) { signature = null; return; }
             if (current === request) {
                 document.body.classList.toggle("pi-sensenova-active", state.active === true);
+                document.body.classList.toggle("pi-looped-active", state.active === true && state.looped === true);
                 for (const tab of ["txt2img", "img2img"]) {
                     let box = root().querySelector(`#sn-progress-${tab}`);
                     const gallery = root().querySelector(`#${tab}_gallery_container`);
@@ -58,7 +59,7 @@
             }
         } catch (_) {
             signature = null;
-            if (current === request) document.body.classList.remove("pi-sensenova-active");
+            if (current === request) document.body.classList.remove("pi-sensenova-active", "pi-looped-active");
         } finally {
             pending = false;
         }

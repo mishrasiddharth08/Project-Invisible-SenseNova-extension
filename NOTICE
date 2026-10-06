@@ -1,1 +1,2 @@
 Project Invisible SenseNova integration. Includes OpenSenseNova/SenseNova-U1 source (Apache-2.0), gguf Python library (MIT), and native-preset integration adapted from Project Invisible Ideogram 4 (Apache-2.0). Model files retain their own licenses. See vendor license files.
+Looped-DiT inference runtime: OpenSenseNova/Looped-DiT (MIT), bundled under vendor/Looped-DiT with its original license and pinned revision. AiWithYou/aikimi-forge-neo was studied for integration ideas; its AGPL code is not bundled or copied into this extension.

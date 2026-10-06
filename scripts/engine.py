@@ -15,9 +15,17 @@ from pi_sensenova import config
 
 NATIVE = {}
 QUALITY = {}
+LOOPED = {}
 
 
 def bind_quality():
+    for tab, (button, controls) in list(LOOPED.items()):
+        fields = ("steps", "cfg_scale", "width", "height")
+        if all(f"{tab}_{field}" in NATIVE for field in fields):
+            button.click(lambda: (100, 6.0, 512, 512, False, False, False, 4, ""),
+                         outputs=[NATIVE[f"{tab}_{field}"] for field in fields] + controls)
+            button.interactive = True
+            del LOOPED[tab]
     for tab, (button, controls) in list(QUALITY.items()):
         if all(f"{tab}_{field}" in NATIVE for field in ("steps", "cfg_scale")):
             button.click(lambda: (50, 4.0, False, True, 3.0),
@@ -28,7 +36,7 @@ def bind_quality():
 
 def remember_component(component, **kwargs):
     name = kwargs.get("elem_id") or getattr(component, "elem_id", None)
-    if name in {f"{tab}_{field}" for tab in ("txt2img", "img2img") for field in ("steps", "cfg_scale")}:
+    if name in {f"{tab}_{field}" for tab in ("txt2img", "img2img") for field in ("steps", "cfg_scale", "width", "height")}:
         NATIVE[name] = component
         bind_quality()
 
@@ -56,18 +64,21 @@ class Script(scripts.Script):
             with gr.Accordion("Advanced", open=False):
                 degrid = gr.Checkbox(label="DeGrid · reduce tiny grid patterns (optional)", value=False)
                 fast = gr.Checkbox(label="8-step speed adapter (requires its matching LoRA)", value=False)
-                resources = gr.Textbox(label="Local config/tokenizer folder (optional if beside checkpoint)", value="")
+                resources = gr.Textbox(label="Local resources folder · U1.5 config/tokenizer or Looped-DiT FLAN-T5-Large", value="")
                 memory = gr.Dropdown(["Auto", "Full", "Fast offload", "Balanced", "Low VRAM"], value="Auto", label="Memory mode")
                 adapter = gr.Textbox(label="Official 8-step adapter file (blank uses models/Lora/SenseNova)", value="")
                 think = gr.Checkbox(label="Think before generating (adds latency)", value=False)
                 shift = gr.Slider(0.1, 10, value=3.0, step=0.1, label="Timestep shift")
+                with gr.Column(elem_id=f"pi_looped_{suffix}"):
+                    loop_depth = gr.Slider(1, 16, value=4, step=1, label="Looped-DiT depth · 4 recommended; fewer loops run faster")
+                    looped_quality = gr.Button("Use Looped-DiT settings · 512×512 / 100 steps / CFG 6", interactive=False)
+                    gr.Markdown("Looped-DiT B16/B32: text-to-image only. Uses its own local FLAN-T5-Large; no separate VAE. More loops add computation without adding model weights.")
                 gr.Markdown("Start at 1024×1024. SenseNova uses its own Euler sampler. Negative prompts become "
                             "‘Avoid’ instructions. Photo details cannot guarantee realism. Hires fix is unsupported.")
                 unload = gr.Button("Unload SenseNova")
                 status = gr.Textbox(label="Status", interactive=False)
                 def release():
-                    from pi_sensenova.engine import ENGINE
-                    ENGINE.unload()
+                    run.release()
                     return "SenseNova unloaded."
                 unload.click(release, outputs=status)
             with gr.Accordion("Get models · manual or automatic", open=False):
@@ -83,8 +94,9 @@ class Script(scripts.Script):
                 download.click(model_setup.download, inputs=model, outputs=download_status)
             tab = "img2img" if is_img2img else "txt2img"
             QUALITY[tab] = (quality, [fast, natural, shift])
+            LOOPED[tab] = (looped_quality, [fast, natural, think, loop_depth, adapter])
             bind_quality()
-        controls = [resources, memory, fast, adapter, natural, think, shift, degrid]
+        controls = [resources, memory, fast, adapter, natural, think, shift, degrid, loop_depth]
         assert len(controls) == len(UI_KEYS)
         for control, value in zip(controls, config.read()):
             control.value = value
@@ -108,10 +120,11 @@ def app_started(demo, app):
     def state(checkpoint: str = ""):
         # Resolve only registered dropdown entries; never accept arbitrary paths.
         from modules import sd_models
-        from pi_sensenova.detect import is_ours
+        from pi_sensenova.detect import is_ours, is_looped
         ci = sd_models.checkpoint_aliases.get(checkpoint) or sd_models.checkpoints_list.get(checkpoint)
         from modules import shared
         return {"active": bool(ci and is_ours(ci.filename)),
+                "looped": bool(ci and is_looped(ci.filename)),
                 "progress": getattr(shared.state, "pi_sensenova_progress", None),
                 "tab": getattr(shared.state, "pi_sensenova_tab", "txt2img")}
 

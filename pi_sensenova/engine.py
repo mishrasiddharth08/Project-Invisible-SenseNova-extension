@@ -220,6 +220,8 @@ class Engine:
         with LOCK:
             if self.model is None:
                 raise RuntimeError("Load a SenseNova checkpoint before generating.")
+            if source is not None and settings.fast:
+                raise ValueError("The official 8-step adapter is text-to-image only; disable Fast for editing.")
             self.configure_adapter(settings)
             torch.cuda.synchronize()
             torch.cuda.reset_peak_memory_stats()
@@ -230,6 +232,8 @@ class Engine:
                                   timestep_shift=float(settings.shift), cfg_norm="none", cfg_interval=(0, 1),
                                   batch_size=1, seed=seed, think_mode=settings.think)
                     if source is None:
+                        if settings.think and getattr(getattr(model.language_model, "lm_head", None), "weight", None) is None:
+                            raise ValueError("Think mode requires a complete language-model head; this checkpoint is pruned.")
                         result = model.t2i_generate(self.tokenizer, prompt, **kwargs)
                     else:
                         result = model.it2i_generate(self.tokenizer, prompt, [source.convert("RGB")], **kwargs)

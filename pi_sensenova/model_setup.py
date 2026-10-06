@@ -12,6 +12,14 @@ from pathlib import Path
 
 
 CATALOG = {
+    "Looped-DiT B16 · finer detail": {
+        "repo": "sensenova/Looped-DiT-B16", "kind": "looped",
+        "file": "looped-dit-b16.pt", "target": "looped-dit-b16.pt",
+    },
+    "Looped-DiT B32 · fewer image tokens": {
+        "repo": "sensenova/Looped-DiT-B32", "kind": "looped",
+        "file": "looped-dit-b32.pt", "target": "looped-dit-b32.pt",
+    },
     "Official SenseNova U1.5 8B MoT": {
         "repo": "sensenova/SenseNova-U1.5-8B-MoT",
         "kind": "folder",
@@ -54,6 +62,11 @@ def _revision(api, repo: str) -> str:
 def instructions(name: str) -> str:
     item = _entry(name)
     root = _models_dir()
+    if item["kind"] == "looped":
+        return (f"Download **https://huggingface.co/{item['repo']}/blob/main/{item['file']}** to "
+                f"`{root / item['target']}`. Download the complete **google/flan-t5-large** "
+                f"model/tokenizer into `{root / 'flan-t5-large'}` (or choose that local folder in Advanced). "
+                "Refresh checkpoints. Use 512×512, 100 steps, CFG 6, loop depth 4. Text-to-image only.")
     if item["kind"] == "folder":
         target = root / item["target"]
         return (f"Download **https://huggingface.co/{item['repo']}** and place the complete model in "
@@ -101,6 +114,18 @@ def _validate_resources(folder: Path) -> None:
         raise RuntimeError("SenseNova resources are missing tokenizer vocabulary files.")
 
 
+def _validate_t5(folder: Path) -> None:
+    if not (folder / "config.json").is_file() or not (folder / "tokenizer_config.json").is_file():
+        raise RuntimeError("FLAN-T5 is missing model/tokenizer configuration.")
+    cfg = json.loads((folder / "config.json").read_text(encoding="utf-8"))
+    if cfg.get("model_type") != "t5" or cfg.get("d_model") != 1024:
+        raise RuntimeError("Looped-DiT requires the matching FLAN-T5-Large text encoder.")
+    if not any((folder / n).is_file() for n in ("spiece.model", "tokenizer.json")):
+        raise RuntimeError("FLAN-T5 is missing tokenizer vocabulary.")
+    if not (folder / "model.safetensors").is_file():
+        raise RuntimeError("FLAN-T5 is missing its safetensors weights.")
+
+
 def _refresh() -> None:
     try:
         from modules import sd_models
@@ -122,7 +147,26 @@ def download(name: str):
         revision = _revision(api, item["repo"])
         staging = Path(tempfile.mkdtemp(prefix=".sensenova-download-", dir=root))
         try:
-            if item["kind"] == "folder":
+            if item["kind"] == "looped":
+                target = root / item["target"]
+                if target.exists():
+                    raise FileExistsError(f"Already exists; kept unchanged: {target}")
+                encoder = root / "flan-t5-large"
+                if encoder.exists():
+                    _validate_t5(encoder)
+                else:
+                    yield "Downloading matching FLAN-T5-Large text encoder…"
+                    _install_snapshot(snapshot_download, "google/flan-t5-large",
+                                      _revision(api, "google/flan-t5-large"), encoder,
+                                      MODEL_PATTERNS, staging, _validate_t5)
+                yield "Downloading selected Looped-DiT checkpoint…"
+                staged_file = Path(hf_hub_download(repo_id=item["repo"], filename=item["file"],
+                                                  revision=revision, local_dir=str(staging)))
+                from .detect import is_looped
+                if not is_looped(staged_file):
+                    raise RuntimeError("Downloaded checkpoint does not match Looped-DiT EMA/config signatures.")
+                os.rename(staged_file, target)
+            elif item["kind"] == "folder":
                 yield "Downloading selected model…"
                 _install_snapshot(snapshot_download, item["repo"], revision,
                                   root / item["target"], MODEL_PATTERNS, staging,

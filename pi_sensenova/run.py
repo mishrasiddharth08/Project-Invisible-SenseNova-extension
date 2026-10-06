@@ -27,9 +27,11 @@ def takeover(p, path, runner=None):
 
 def release():
     # Don't import torch or the official package on ordinary model generations.
-    module = sys.modules.get("pi_sensenova.engine")
-    if module is not None and module.ENGINE.model is not None:
-        module.ENGINE.unload()
+    for name, engine_name in (("pi_sensenova.engine", "ENGINE"), ("pi_sensenova.looped", "LOOPED_ENGINE")):
+        module = sys.modules.get(name)
+        engine = getattr(module, engine_name, None)
+        if engine is not None:
+            engine.unload()
 
 
 def install_selection_release():
@@ -40,9 +42,11 @@ def install_selection_release():
         return
     original = info.onchange
     def changed():
-        module = sys.modules.get("pi_sensenova.engine")
-        if module is not None:
-            module.ENGINE.request_unload()
+        for name, engine_name in (("pi_sensenova.engine", "ENGINE"), ("pi_sensenova.looped", "LOOPED_ENGINE")):
+            module = sys.modules.get(name)
+            engine = getattr(module, engine_name, None)
+            if engine is not None:
+                engine.request_unload()
         if original is not None:
             return original()
     changed._sn_selection_release = True

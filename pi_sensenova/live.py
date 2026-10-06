@@ -49,7 +49,7 @@ class LiveProgress:
         self.state.pi_sensenova_progress = dict(current=current, overall=(self.index + current) / max(1, self.count),
                                                image=self.index + 1, count=self.count)
         self.state.textinfo = (
-            f"SenseNova image {self.index + 1}/{self.count} · Applying DeGrid…"
+            f"SenseNova image {self.index + 1}/{self.count} · Finishing image…"
             if self.defer_final and step >= total else
             f"SenseNova image {self.index + 1}/{self.count} · Step {step}/{total}"
         )

@@ -9,9 +9,10 @@ import torch
 
 
 class BlockStream:
-    def __init__(self, model, target="cuda"):
+    def __init__(self, model, target="cuda", layers_attr="language_model.model.layers"):
         self.model = model
         self.target = target
+        self.layers_attr = layers_attr
         self.saved = []
         self.handles = []
 
@@ -38,7 +39,7 @@ class BlockStream:
                 module._buffers[name] = tensor
 
     def __enter__(self):
-        layers = self.model.language_model.model.layers
+        layers = self.model.get_submodule(self.layers_attr)
         self.saved = self.capture(self.model)
         layer_ids = {id(child) for layer in layers for child in layer.modules()}
         try:

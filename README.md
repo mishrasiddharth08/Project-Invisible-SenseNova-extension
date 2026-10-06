@@ -1,4 +1,4 @@
-# Project Invisible — SenseNova U1.5 for Forge Neo
+# Project Invisible — SenseNova U1.5 and Looped-DiT for Forge Neo
 
 Select a SenseNova checkpoint in the normal Forge dropdown and press the
 normal Generate button. No discarded Stable Diffusion pass, second app,
@@ -41,6 +41,41 @@ after you click **Download selected model**; it also retrieves GGUF resources wh
 needed. Existing files are kept. Refresh the checkpoint dropdown after downloading.
 
 ## Controls
+
+### Looped-DiT B16 / B32
+
+Added October 6, 2026. Runtime pinned at `65a7705ad2954fa127721bd1131ea8f865688848`.
+62 regression checks passed, including exact CPU Euler parity and exact CUDA
+BF16 parity between the upstream sampler and our block-streamed sampler using
+a small randomly initialized real LoopedMMDiT. Full released model weights were
+not downloaded for this validation.
+
+Choose either official Looped-DiT checkpoint from **Get models · manual or automatic**.
+Place `looped-dit-b16.pt` or `looped-dit-b32.pt` in `models/Stable-diffusion`.
+Place the complete `google/flan-t5-large` encoder/tokenizer in the sibling
+`flan-t5-large` folder, or select its local folder in Advanced. Automatic setup
+downloads both components only when requested. Generation uses local files only.
+Refresh checkpoints, select Looped-DiT, then use **Use Looped-DiT settings**:
+**512×512, 100 Euler steps, CFG 6, loop depth 4**. Lower loop depths reduce work;
+image quality changes. Both B16 and B32 use the same native Generate, gallery,
+batch saving, previews, current/overall progress bars and unload controls.
+
+This is a separate pixel-space architecture, not a U1.5 upgrade or LoRA.
+Its shared middle blocks, self-modulating attention and trained weights come
+from the official MIT runtime. No separate VAE is used. Image editing, U1.5
+speed adapters, Think mode and arbitrary quantized checkpoints are unsupported
+for Looped-DiT. Its training and benchmark tools remain upstream; this extension
+adds inference to Forge. Official full-weight visual quality and speed must be
+validated on your machine; synthetic runtime tests do not establish either.
+
+The Aikimi SenseNova Studio inspired explicit profile validation and memory
+lifecycle checks. Its separate Studio, worker environment and Forge core code
+are not installed by this extension. We preserve the native txt2img/img2img flow.
+
+Sources: [Looped-DiT](https://github.com/OpenSenseNova/Looped-DiT),
+[Aikimi SenseNova Studio](https://github.com/AiWithYou/aikimi-forge-neo/tree/neo/extensions-builtin/sensenova-u15-studio).
+
+### SenseNova U1.5
 
 - Two progress bars show the current image and the whole batch separately.
   Selecting another checkpoint releases SenseNova's model and tokenizer references
@@ -128,6 +163,9 @@ chosen base. No model weights are included in the extension package.
 
 
 ## Special Thanks
+
+- [**OpenSenseNova / Looped-DiT**](https://github.com/OpenSenseNova/Looped-DiT) - official model architecture and MIT inference runtime
+- [**AiWithYou / Aikimi Forge Neo**](https://github.com/AiWithYou/aikimi-forge-neo) - SenseNova profile validation and memory lifecycle inspiration
 
 - [**r/sdforall**](https://www.reddit.com/r/sdforall/) - community discussion and testing
 - [**r/SECourses**](https://www.reddit.com/r/SECourses/) - community discussion and testing

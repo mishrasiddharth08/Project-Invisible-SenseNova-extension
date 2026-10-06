@@ -48,7 +48,7 @@ class LiveTests(unittest.TestCase):
         live.preview(tensor, 4, 4)
         self.assertEqual(self.frames, [])
         self.assertEqual(self.state.sampling_step, 3)
-        self.assertIn("Applying DeGrid", self.state.textinfo)
+        self.assertIn("Finishing image", self.state.textinfo)
         live.publish_final(processed, 4)
         self.assertIs(self.frames[0], processed)
         self.assertEqual(self.state.sampling_step, 4)

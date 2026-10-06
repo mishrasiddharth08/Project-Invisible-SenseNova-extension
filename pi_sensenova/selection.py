@@ -24,6 +24,16 @@ def register():
     for root in model_roots():
         if not root.is_dir():
             continue
+        from .detect import is_looped
+        for checkpoint in root.rglob("*.pt"):
+            if str(checkpoint.resolve()) in known or not is_looped(checkpoint):
+                continue
+            ci = sd_models.CheckpointInfo(str(checkpoint.resolve()))
+            ci.name = f"Looped-DiT / {checkpoint.stem}"
+            ci.title = ci.name
+            ci.ids += [ci.name, str(checkpoint.resolve())]
+            ci.register()
+            known.add(str(checkpoint.resolve()))
         for config in root.rglob("config.json"):
             if str(config.resolve()) in known or not is_ours(config):
                 continue
