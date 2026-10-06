@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc"><title id="title">Project Invisible: SenseNova and Looped-DiT</title><desc id="desc">Model comparison, workflow and validation for the native Forge Neo extension.</desc><rect width="1400" height="900" fill="#0b1220"/>
+<text x="60" y="57" fill="#72e2ba" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700">PROJECT INVISIBLE</text>
+<text x="60" y="121" fill="#f1f5f9" font-family="Segoe UI,Arial,sans-serif" font-size="46" font-weight="700">Two models. One familiar Forge workflow.</text>
+<text x="60" y="164" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="25" font-weight="400">Choose a checkpoint → write a prompt → press the native Generate button.</text>
+<rect x="60" y="205" width="610" height="280" rx="18" fill="#152237"/>
+<rect x="60" y="205" width="610" height="6" rx="2" fill="#84bcff"/>
+<text x="86" y="260" fill="#84bcff" font-family="Segoe UI,Arial,sans-serif" font-size="32" font-weight="700">SenseNova U1.5</text>
+<rect x="730" y="205" width="610" height="280" rx="18" fill="#152237"/>
+<rect x="730" y="205" width="610" height="6" rx="2" fill="#72e2ba"/>
+<text x="756" y="260" fill="#72e2ba" font-family="Segoe UI,Arial,sans-serif" font-size="32" font-weight="700">Looped-DiT B16 / B32</text>
+<text x="86" y="314" fill="#f1f5f9" font-family="Segoe UI,Arial,sans-serif" font-size="24" font-weight="400">Create images or edit a source in img2img.</text>
+<text x="86" y="360" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="400">Base model: try 1024×1024 · 50 steps · CFG 4.</text>
+<text x="86" y="404" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="400">Official 8-step adapter: text-to-image only.</text>
+<text x="86" y="447" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="21" font-weight="400">Editing is experimental; masks are unsupported.</text>
+<text x="756" y="314" fill="#f1f5f9" font-family="Segoe UI,Arial,sans-serif" font-size="24" font-weight="400">Text-to-image with shared transformer loops.</text>
+<text x="756" y="360" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="400">512×512 · 100 Euler steps · CFG 6 · 4 loops.</text>
+<text x="756" y="404" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="400">Needs its matching local FLAN-T5-Large encoder.</text>
+<text x="756" y="447" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="21" font-weight="400">Fewer loops reduce work and change quality.</text>
+<text x="60" y="551" fill="#72e2ba" font-family="Segoe UI,Arial,sans-serif" font-size="21" font-weight="700">GET STARTED</text>
+<rect x="60" y="580" width="240" height="126" rx="18" fill="#152237"/>
+<text x="78" y="621" fill="#72e2ba" font-family="Segoe UI,Arial,sans-serif" font-size="28" font-weight="700">1</text>
+<text x="78" y="660" fill="#f1f5f9" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700">Get models</text>
+<text x="78" y="692" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="16" font-weight="400">Manual or automatic</text>
+<rect x="320" y="580" width="240" height="126" rx="18" fill="#152237"/>
+<text x="338" y="621" fill="#72e2ba" font-family="Segoe UI,Arial,sans-serif" font-size="28" font-weight="700">2</text>
+<text x="338" y="660" fill="#f1f5f9" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700">Refresh dropdown</text>
+<text x="338" y="692" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="16" font-weight="400">Select your checkpoint</text>
+<rect x="580" y="580" width="240" height="126" rx="18" fill="#152237"/>
+<text x="598" y="621" fill="#72e2ba" font-family="Segoe UI,Arial,sans-serif" font-size="28" font-weight="700">3</text>
+<text x="598" y="660" fill="#f1f5f9" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700">Choose settings</text>
+<text x="598" y="692" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="16" font-weight="400">Use its settings button</text>
+<rect x="840" y="580" width="240" height="126" rx="18" fill="#152237"/>
+<text x="858" y="621" fill="#72e2ba" font-family="Segoe UI,Arial,sans-serif" font-size="28" font-weight="700">4</text>
+<text x="858" y="660" fill="#f1f5f9" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700">Generate</text>
+<text x="858" y="692" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="16" font-weight="400">Watch the image develop</text>
+<rect x="1100" y="580" width="240" height="126" rx="18" fill="#152237"/>
+<text x="1118" y="621" fill="#72e2ba" font-family="Segoe UI,Arial,sans-serif" font-size="28" font-weight="700">5</text>
+<text x="1118" y="660" fill="#f1f5f9" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700">Save / switch</text>
+<text x="1118" y="692" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="16" font-weight="400">Native gallery + unload</text>
+<rect x="60" y="750" width="1280" height="80" rx="18" fill="#18332e"/>
+<text x="86" y="788" fill="#72e2ba" font-family="Segoe UI,Arial,sans-serif" font-size="24" font-weight="700">Current + overall progress   ·   Final image matches saved output   ·   Memory offloading</text>
+<text x="60" y="875" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="400">62 checks passed, including small-model CUDA parity. Full released weights need visual validation.</text>
+</svg>

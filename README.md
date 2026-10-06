@@ -6,6 +6,13 @@ package upgrades or changes to Forge core.
 
 ## Install
 
+![SenseNova and Looped-DiT integration infographic](docs/assets/integration-overview.png)
+
+![Illustrated Forge UI guide with checkpoint selection and two progress bars](docs/assets/ui-guide.png)
+
+The UI image is an illustrated guide; placement varies by Forge version.
+Editable SVG versions are in [`docs/assets`](docs/assets).
+
 1. Download this repository using **Code → Download ZIP**.
 2. Extract it into Forge Neo’s `extensions` folder. Keep only one SenseNova extension installed.
 3. Fully restart Forge. Choose the `sensenova` preset and your SenseNova checkpoint.

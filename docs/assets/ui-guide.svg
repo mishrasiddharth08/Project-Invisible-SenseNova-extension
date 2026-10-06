@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="980" viewBox="0 0 1400 980" role="img" aria-labelledby="title desc"><title id="title">Project Invisible UI guide</title><desc id="desc">Illustrated Forge UI guide, not an application screenshot. Looped-DiT selected with recommended settings.</desc><rect width="1400" height="980" fill="#0b1220"/>
+<text x="60" y="54" fill="#72e2ba" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700">PROJECT INVISIBLE · UI GUIDE</text>
+<text x="60" y="119" fill="#f1f5f9" font-family="Segoe UI,Arial,sans-serif" font-size="43" font-weight="700">Same Generate button. Same Forge gallery.</text>
+<text x="60" y="157" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="400">Illustrated layout — this is a guide, not a live screenshot. Exact placement varies by Forge version.</text>
+<rect x="60" y="195" width="1280" height="82" rx="18" fill="#152237"/>
+<text x="82" y="229" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="18" font-weight="400">Checkpoint dropdown</text>
+<text x="82" y="262" fill="#84bcff" font-family="Segoe UI,Arial,sans-serif" font-size="23" font-weight="700">Looped-DiT / looped-dit-b16</text>
+<text x="870" y="255" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="21" font-weight="400">Refresh</text>
+<rect x="1110" y="214" width="204" height="45" rx="10" fill="#235239"/>
+<text x="1145" y="245" fill="#72e2ba" font-family="Segoe UI,Arial,sans-serif" font-size="25" font-weight="700">Generate</text>
+<rect x="60" y="300" width="705" height="578" rx="18" fill="#152237"/>
+<rect x="82" y="321" width="128" height="44" rx="8" fill="#254665"/>
+<text x="107" y="351" fill="#84bcff" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700">txt2img</text>
+<text x="239" y="351" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="400">img2img · U1.5 editing</text>
+<text x="82" y="414" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="19" font-weight="400">Prompt</text>
+<rect x="82" y="425" width="660" height="82" rx="8" fill="#0d1829"/>
+<text x="98" y="464" fill="#f1f5f9" font-family="Segoe UI,Arial,sans-serif" font-size="24" font-weight="400">A red cube on top of a blue sphere</text>
+<text x="82" y="559" fill="#84bcff" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700">Width 512    Height 512    Steps 100    CFG 6</text>
+<text x="82" y="596" fill="#f1f5f9" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700">SenseNova · Project Invisible → Advanced</text>
+<text x="82" y="639" fill="#72e2ba" font-family="Segoe UI,Arial,sans-serif" font-size="23" font-weight="700">Looped-DiT depth: 4</text>
+<rect x="82" y="661" width="660" height="49" rx="8" fill="#235239"/>
+<text x="102" y="691" fill="#72e2ba" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="700">Use Looped-DiT settings · 512×512 / 100 steps / CFG 6</text>
+<text x="82" y="759" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="400">Local resources: flan-t5-large</text>
+<text x="82" y="798" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="21" font-weight="400">Memory mode: Auto       Natural photo details: off</text>
+<text x="82" y="842" fill="#84bcff" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="400">Get models · manual or automatic       Unload SenseNova</text>
+<rect x="788" y="300" width="552" height="578" rx="18" fill="#152237"/>
+<text x="814" y="344" fill="#f1f5f9" font-family="Segoe UI,Arial,sans-serif" font-size="24" font-weight="700">Native live preview / gallery</text>
+<rect x="814" y="365" width="500" height="330" rx="10" fill="#243447"/>
+<text x="889" y="535" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="28" font-weight="700">Image develops here</text>
+<text x="894" y="572" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="21" font-weight="400">Illustrated preview area</text>
+<text x="814" y="744" fill="#84bcff" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="400">Current image · illustrative 32%</text>
+<rect x="814" y="761" width="500" height="16" rx="6" fill="#0d1829"/>
+<rect x="814" y="761" width="160" height="16" rx="6" fill="#84bcff"/>
+<text x="814" y="816" fill="#72e2ba" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="400">Overall generation · illustrative 8%</text>
+<rect x="814" y="833" width="500" height="16" rx="6" fill="#0d1829"/>
+<rect x="814" y="833" width="40" height="16" rx="6" fill="#72e2ba"/>
+<text x="60" y="934" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="400">For editing, choose SenseNova U1.5 and use img2img. Looped-DiT supports text-to-image only.</text>
+</svg>
