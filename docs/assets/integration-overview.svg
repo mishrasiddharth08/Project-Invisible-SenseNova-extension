@@ -39,5 +39,5 @@
 <text x="1118" y="692" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="16" font-weight="400">Native gallery + unload</text>
 <rect x="60" y="750" width="1280" height="80" rx="18" fill="#18332e"/>
 <text x="86" y="788" fill="#72e2ba" font-family="Segoe UI,Arial,sans-serif" font-size="24" font-weight="700">Current + overall progress   ·   Final image matches saved output   ·   Memory offloading</text>
-<text x="60" y="875" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="400">62 checks passed, including small-model CUDA parity. Full released weights need visual validation.</text>
+<text x="60" y="875" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="400">Oct 6 validation: 62 tests, including small-model CUDA parity. Full weights need visual validation.</text>
 </svg>

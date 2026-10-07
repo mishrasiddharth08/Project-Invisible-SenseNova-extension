@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1100" viewBox="0 0 1400 1100" role="img" aria-labelledby="title desc"><title id="title">Looped-DiT B16 / B32 UI guide</title><desc id="desc">Illustrated current Forge controls; not a screenshot.</desc><rect width="1400" height="1100" fill="#0b1220"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1100" viewBox="0 0 1400 1100" role="img" aria-labelledby="title desc"><title id="title">SenseNova U1.5 UI guide</title><desc id="desc">Illustrated current Forge controls; not a screenshot.</desc><rect width="1400" height="1100" fill="#0b1220"/>
 <text x="60" y="52" fill="#72e2ba" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700">PROJECT INVISIBLE / CURRENT UI GUIDE</text>
-<text x="60" y="117" fill="#f1f5f9" font-family="Segoe UI,Arial,sans-serif" font-size="42" font-weight="700">Looped-DiT B16 / B32 in the native Forge workflow</text>
+<text x="60" y="117" fill="#f1f5f9" font-family="Segoe UI,Arial,sans-serif" font-size="42" font-weight="700">SenseNova U1.5 in the native Forge workflow</text>
 <text x="60" y="155" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="21" font-weight="400">Illustrated guide, not a live screenshot. Control labels match the extension; placement may vary.</text>
 <rect x="60" y="190" width="1280" height="86" rx="18" fill="#152237"/>
 <text x="82" y="221" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="18" font-weight="400">Native checkpoint dropdown</text>
-<text x="82" y="260" fill="#84bcff" font-family="Segoe UI,Arial,sans-serif" font-size="25" font-weight="700">Looped-DiT / looped-dit-b16</text>
+<text x="82" y="260" fill="#84bcff" font-family="Segoe UI,Arial,sans-serif" font-size="25" font-weight="700">Your SenseNova U1.5 checkpoint</text>
 <text x="874" y="253" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="21" font-weight="400">Refresh</text>
 <rect x="1110" y="209" width="204" height="47" rx="10" fill="#235239"/>
 <text x="1142" y="240" fill="#72e2ba" font-family="Segoe UI,Arial,sans-serif" font-size="25" font-weight="700">Generate</text>
@@ -15,16 +15,16 @@
 <text x="82" y="398" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="18" font-weight="400">Prompt</text>
 <rect x="82" y="414" width="699" height="74" rx="8" fill="#0d1829"/>
 <text x="98" y="453" fill="#f1f5f9" font-family="Segoe UI,Arial,sans-serif" font-size="23" font-weight="400">Describe your image, or the edit in img2img.</text>
-<text x="82" y="538" fill="#84bcff" font-family="Segoe UI,Arial,sans-serif" font-size="23" font-weight="700">512 x 512 / 100 steps / CFG 6</text>
+<text x="82" y="538" fill="#84bcff" font-family="Segoe UI,Arial,sans-serif" font-size="23" font-weight="700">1024 x 1024 / 50 steps / CFG 4</text>
 <text x="82" y="578" fill="#f1f5f9" font-family="Segoe UI,Arial,sans-serif" font-size="24" font-weight="700">SenseNova - Project Invisible</text>
-<text x="82" y="614" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="21" font-weight="400">Natural photo details: off with Looped-DiT preset</text>
+<text x="82" y="614" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="21" font-weight="400">Natural photo details: optional prompt instructions</text>
 <rect x="82" y="635" width="699" height="48" rx="8" fill="#235239"/>
-<text x="100" y="667" fill="#72e2ba" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700">Use Looped-DiT settings (inside Advanced)</text>
+<text x="100" y="667" fill="#72e2ba" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700">Use photo quality settings / 50 steps / CFG 4</text>
 <text x="82" y="730" fill="#f1f5f9" font-family="Segoe UI,Arial,sans-serif" font-size="23" font-weight="700">Advanced / optional controls</text>
-<text x="82" y="771" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="400">Looped-DiT depth: 4 (1-16 available)</text>
-<text x="82" y="811" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="400">Local resources: matching FLAN-T5-Large folder</text>
-<text x="82" y="851" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="400">Memory mode: Auto / Full / offload options</text>
-<text x="82" y="891" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="400">U1.5 fast adapter and Think must be disabled</text>
+<text x="82" y="771" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="400">DeGrid / off by default     Memory mode / Auto</text>
+<text x="82" y="811" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="400">8-step speed adapter / txt2img only (local LoRA)</text>
+<text x="82" y="851" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="400">Local resources folder / U1.5 config and tokenizer</text>
+<text x="82" y="891" fill="#a4b5cc" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="400">Think / optional     Timestep shift / default 3</text>
 <text x="82" y="959" fill="#84bcff" font-family="Segoe UI,Arial,sans-serif" font-size="21" font-weight="400">Unload SenseNova / releases either engine</text>
 <rect x="828" y="299" width="512" height="462" rx="18" fill="#152237"/>
 <text x="850" y="343" fill="#f1f5f9" font-family="Segoe UI,Arial,sans-serif" font-size="23" font-weight="700">Native live preview / gallery</text>

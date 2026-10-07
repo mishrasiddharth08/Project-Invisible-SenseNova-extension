@@ -4,14 +4,66 @@ Select a SenseNova checkpoint in the normal Forge dropdown and press the
 normal Generate button. No discarded Stable Diffusion pass, second app,
 package upgrades or changes to Forge core.
 
+## Model settings at a glance
+
+![SenseNova and Looped-DiT workflow infographic](docs/assets/integration-overview.png)
+
+| Choose | Use | Starting settings | Resources |
+| --- | --- | --- | --- |
+| SenseNova U1.5 base | txt2img; experimental instruction editing in img2img | 1024 x 1024, 50 steps, CFG 4 | Matching U1.5 config/tokenizer |
+| U1.5 official 8-step adapter | txt2img only | 8 steps, CFG 1; enable Fast | Base model plus official 8-step LoRA |
+| Looped-DiT B16 / B32 | txt2img only | 512 x 512, 100 steps, CFG 6, loop depth 4 | Complete local FLAN-T5-Large |
+
+Use the native checkpoint dropdown, Generate button, batch controls and gallery.
+The external VAE/TE selector is hidden only while this extension owns the selected
+checkpoint. Other models keep their normal controls.
+
+## Current UI
+
+Open **SenseNova - Project Invisible** in txt2img or img2img.
+The primary controls are **Natural photo details** and **Use photo quality settings**.
+Memory, DeGrid, adapters and Looped-DiT controls live in **Advanced**.
+The loop-depth control and its settings button appear only for Looped-DiT.
+
+### SenseNova U1.5
+
+![SenseNova U1.5 current UI guide](docs/assets/ui-guide-u15.png)
+
+For all editing, use the native **img2img** source and describe the change.
+Disable the 8-step speed adapter for editing. Natural photo details add prompt
+instructions; they do not retouch pixels or guarantee realism.
+
+### Looped-DiT
+
+![Looped-DiT current UI guide](docs/assets/ui-guide.png)
+
+Select Looped-DiT and click **Advanced > Use Looped-DiT settings**.
+This sets width/height, steps, CFG and loop depth, disables Natural photo details,
+Fast and Think, and clears the U1.5 adapter path.
+
+The pictures are **illustrated guides, not live screenshots**. Exact positions
+vary by Forge version. [PNG and editable SVG originals](docs/assets) are included.
+Optional diagram regeneration requires Pillow: run **python docs/build_visuals.py**.
+
+## Download models
+
+Open **Get models - manual or automatic**, select the model, then choose:
+
+- **Manual (recommended)**: use the displayed links and folders.
+- **Automatic**: press **Download selected model**. Downloads start only on request.
+
+Refresh the checkpoint list after setup. Generation uses local model files.
+Two progress bars report the current image and the full batch. Enabled previews
+update at most once per second when a new step is available; the exact finished
+image is published after final processing. **Unload SenseNova** releases either
+engine. Switching checkpoints requests release at the next safe cancellation point.
+
+Documentation and UI guides refreshed **October 7, 2026**.
+Validation recorded on October 6: 62 tests, including small-model CUDA sampling
+parity. This is not a full released-weight visual quality or speed benchmark.
+
 ## Install
 
-![SenseNova and Looped-DiT integration infographic](docs/assets/integration-overview.png)
-
-![Illustrated Forge UI guide with checkpoint selection and two progress bars](docs/assets/ui-guide.png)
-
-The UI image is an illustrated guide; placement varies by Forge version.
-Editable SVG versions are in [`docs/assets`](docs/assets).
 
 1. Download this repository using **Code → Download ZIP**.
 2. Extract it into Forge Neo’s `extensions` folder. Keep only one SenseNova extension installed.
@@ -42,8 +94,8 @@ config/tokenizer files in the checkpoint's folder or its `SenseNova-resources`
 subfolder. You can explicitly choose a resources folder in Advanced.
 Complete HF snapshots also appear in the normal dropdown.
 
-Open **Get models · manual or automatic** to choose the official U1.5 model or
-community Q8 GGUF. Manual download is the default. Automatic download begins only
+Open **Get models · manual or automatic** to choose official U1.5, community Q8 GGUF,
+or Looped-DiT B16/B32. Manual download is the default. Automatic download begins only
 after you click **Download selected model**; it also retrieves GGUF resources when
 needed. Existing files are kept. Refresh the checkpoint dropdown after downloading.
 
